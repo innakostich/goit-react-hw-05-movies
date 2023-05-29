@@ -1,9 +1,9 @@
 import React, { Suspense, useState, useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 import { ToastContainer } from 'react-toastify';
-import { Slug } from 'slugify';
+import { slugify } from 'slugify';
 import css from './App.module.css';
 
 const API_KEY = '81a8869c255f2e2cdd160d2494e708bd';
@@ -211,14 +211,13 @@ const App = () => {
     <BrowserRouter>
       <div className={css.container}>
         <Suspense fallback={<Loader />}>
-         
-            <Route exact path="/" component={Home} />
-            <Route exact path="/movies" component={Movies} />
-            <Route exact path="/movies/:movieId" component={MovieDetails} />
-            <Route exact path="/movies/:movieId/cast" component={Cast} />
-            <Route exact path="/movies/:movieId/reviews" component={Reviews} />
-            
-          
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:movieId" element={<MovieDetails />} />
+            <Route path="/movies/:movieId/cast" element={<Cast />} />
+            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          </Routes>
         </Suspense>
       </div>
       <ToastContainer />
