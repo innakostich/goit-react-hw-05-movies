@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { searchMovies } from '../../services/movie.api';
-import styles from './Movies.module.css';
+import css from './Movies.module.css';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,7 +18,7 @@ const Movies = () => {
   };
 
   return (
-    <div className={styles.movies}>
+    <div className={css.movies}>
       <h1>Search Movies</h1>
       <input
         type="text"

@@ -1,0 +1,19 @@
+.movieDetails {
+    margin: 20px;
+    font-size: 24px;
+  }
+  .movieTitle {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  .movieOverview {
+    margin-bottom: 20px;
+  }
+  .movieImage {
+    width: 300px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
