@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
 import { ToastContainer } from 'react-toastify';
-// import  slugify  from 'slugify';
+import  slugify  from 'slugify';
 import css from './App.module.css';
 
 const API_KEY = '81a8869c255f2e2cdd160d2494e708bd';
