@@ -1,37 +1,101 @@
-import React, { useState } from 'react';
-import { searchMovies } from '../../services/movie.api';
 import css from './Movies.module.css';
+import { useState, useEffect } from 'react';
+import { searchMovies } from '../services/movies-api';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import Notiflix from 'notiflix';
 
 const Movies = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [movieToFind, setMovieToFind] = useState('');
+  const [movies, setMovies] = useState([]);
 
-  const handleSearch = async () => {
-    if (searchQuery) {
-      try {
-        const response = await searchMovies(searchQuery);
-        setSearchResults(response.results);
-      } catch (error) {
-        console.error('Failed to search movies:', error);
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    const searchString = new URLSearchParams(location.search).get('query');
+
+    if (searchString) {
+      const getMovies = async () => {
+        const { results } = await searchMovies(searchString);
+
+        setMovies(results);
+        setMovieToFind(searchString);
+
+        console.log(searchString);
+      };
+
+      getMovies();
+    }
+  }, [location.search]);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    if (movieToFind.trim()) {
+      const { results } = await searchMovies(movieToFind);
+
+      setMovies(results);
+      setMovieToFind('');
+
+      if (results.length === 0) {
+        Notiflix.Notify.warning(
+          'No movies found! Please change your request and try again'
+        );
       }
+
+      history.push({
+        ...location,
+        search: `query=${movieToFind}`,
+      });
     }
   };
 
   return (
-    <div className={css.movies}>
-      <h1>Search Movies</h1>
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-      <ul>
-        {searchResults.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
+    <>
+      <header className={css.searchbar}>
+        <form className={css.searchForm} onSubmit={handleSubmit}>
+          <input
+            onChange={e => setMovieToFind(e.target.value)}
+            className={css.SearchFormInput}
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search movie"
+            value={movieToFind}
+          />
+          <button type="submit" className={css.searchFormButton}>
+            search
+          </button>
+        </form>
+      </header>
+      {movies.length > 0 &&
+        movies.map(({ id, title, poster_path }) => (
+          <ul>
+            <li key={id}>
+              <Link
+                to={{
+                  pathname: `/movies/${`${id}`}`,
+                  state: {
+                    from: {
+                      location,
+                    },
+                  },
+                }}
+              >
+                <img
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w300${poster_path}`
+                      : 'https://pomogaetsrazu.ru/images/offers/2829219234.jpg'
+                  }
+                  alt={title}
+                />
+                <p>{title}</p>
+              </Link>
+            </li>
+          </ul>
         ))}
-      </ul>
-    </div>
+    </>
   );
 };
 
