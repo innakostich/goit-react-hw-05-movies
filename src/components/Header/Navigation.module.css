@@ -3,10 +3,11 @@
     text-decoration: none;
     padding: 12px;
     font-weight: 500;
-    color: #2a363b;
+    font-weight: bold;
+    color: #3f5a69;
     font-size: 18px;
   }
   
   .active {
-        color: #b92121;
+        color: #2181b9;
     }

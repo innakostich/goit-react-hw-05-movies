@@ -5,7 +5,7 @@ import css from './Loader.module.css';
 const Loader = () => {
   return (
     <div className={css.loader}>
-      <BeatLoader color="#555" />
+      <BeatLoader color="#506f70" />
     </div>
   );
 };
