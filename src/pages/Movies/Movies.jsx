@@ -1,7 +1,7 @@
 import css from './Movies.module.css';
 import { useState, useEffect } from 'react';
-import { searchMovies } from '../services/movies-api';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { searchMovies } from 'services/movies.api';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Notiflix from 'notiflix';
 
 const Movies = () => {
@@ -9,7 +9,7 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
 
   const location = useLocation();
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     const searchString = new URLSearchParams(location.search).get('query');

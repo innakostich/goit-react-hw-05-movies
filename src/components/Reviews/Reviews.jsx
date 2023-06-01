@@ -1,46 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getMovieReviews } from '../../services/movie.api';
-import css from './Reviews.module.css';
+import { useState, useEffect } from 'react';
+import { getReviews } from 'services/movies.api';
+import PropTypes from 'prop-types';
 
-const Reviews = () => {
-  const { movieId } = useParams();
+export default function MovieReview({ movieId }) {
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovieReviews = async () => {
-      try {
-        const response = await getMovieReviews(movieId);
-        setReviews(response.results);
-        setLoading(false);
-      } catch (error) {
-        console.error('Failed to fetch movie reviews:', error);
-        setLoading(false);
-      }
+    const getCast = async () => {
+      const { results } = await getReviews(movieId);
+      setReviews(results);
     };
-
-    fetchMovieReviews();
+    getCast();
   }, [movieId]);
 
-  if (loading) {
-    return (
-      <div className={css.loaderContainer}>
-        <BeatLoader color="#555" />
-      </div>
-    );
-  }
-
   return (
-    <div className={css.reviews}>
-      <h1>Reviews</h1>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>{review.content}</li>
-        ))}
-      </ul>
+    <div>
+      {reviews.length > 0 ? (
+        <>
+          <ul>
+            {reviews.map(({ id, author, content }) => (
+              <li key={id}>
+                <p>{author}</p>
+                <p>{content}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>We don't have any reviews for this movie</p>
+      )}
     </div>
   );
-};
+}
 
-export default Reviews;
+MovieReview.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

@@ -3,28 +3,27 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import {
   useParams,
   NavLink,
-  useRouteMatch,
+  useMatch,
   useLocation,
-  useHistory,
-  Switch,
+  useNavigate,
+  Routes,
   Route,
 } from 'react-router-dom';
-import { getMovieDetails, IMAGE_URL } from '../../services/movies-api';
+import { getMovieDetails, IMAGE_URL } from '../../services/movies.api';
 import css from './MovieDetails.module.css';
 
 const MovieReview = lazy(() =>
-  import('../MovieReview')
+  import('components/Reviews/Reviews')
 );
 const MovieCastView = lazy(() =>
-  import('../MovieCastView')
-);
+  import('components/Cast/Cast'));
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  const history = useHistory();
+  const history = useNavigate();
   const location = useLocation();
-  const { url, path } = useRouteMatch();
+  const { url, path } = useMatch();
 
   useEffect(() => {
     const getMovie = async () => {
@@ -94,7 +93,7 @@ export default function MovieDetailsPage() {
       </nav>
 
       <Suspense fallback={<Loader />}>
-        <Switch>
+        <Routes>
           <Route path={`${path}/cast`}>
             <MovieCastView movieId={movieId} />
           </Route>
@@ -102,7 +101,7 @@ export default function MovieDetailsPage() {
           <Route path={`${path}/reviews`}>
             <MovieReview movieId={movieId} />
           </Route>
-        </Switch>
+        </Routes>
       </Suspense>
     </>
   );

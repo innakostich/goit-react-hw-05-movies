@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getMovieCast, IMAGE_URL } from '../services/movies-api';
+import { getMovieCast, IMAGE_URL } from 'services/movies.api';
 import PropTypes from 'prop-types';
 
 export default function MovieCastView({ movieId }) {

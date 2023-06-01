@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getTrendingMovies } from '../../services/movie.api';
-import css from './Home.module.css';
+import { fetchTrendingMovies } from 'services/movies.api';
+import { BeatLoader } from 'react-spinners';
+
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -9,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await getTrendingMovies();
+        const response = await fetchTrendingMovies();
         setTrendingMovies(response.results);
         setLoading(false);
       } catch (error) {

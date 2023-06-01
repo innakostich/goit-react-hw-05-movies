@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 export default function NotFoundView() {
-  const history = useHistory();
+  const history = useLoaderData();
 
   const onGoBack = () => {
     history.push('/');
