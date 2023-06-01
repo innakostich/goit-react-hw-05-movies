@@ -17,9 +17,12 @@ export default function App() {
       <Navigation />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movies" element={<MoviesPage />} />
-          <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
+        <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage baseUrl={BASE_URL} />} />
+          <Route
+            path="/movies/:movieId"
+            element={<MovieDetailsPage baseUrl={BASE_URL} />}
+          />
           <Route path="*" element={<NotFoundView />} />
         </Routes>
       </Suspense>
