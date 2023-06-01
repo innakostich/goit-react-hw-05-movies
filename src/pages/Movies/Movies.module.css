@@ -38,23 +38,11 @@
   outline: none;
 }
 
-.SearchForm-button:hover {
+.searchFormButton:hover {
   opacity: 1;
 }
 
-.SearchFormBtnLabel {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-  border: 0;
-}
-
-.SearchFormInput {
+.searchFormInput {
   display: inline-block;
   width: 100%;
   font: inherit;
@@ -65,7 +53,46 @@
   padding-right: 4px;
 }
 
-.SearchFormInput::placeholder {
+.searchFormInput::placeholder {
   font: inherit;
+  font-size: 18px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+img {
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+  
+}
+
+p {
+  margin: 0;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 500;
+  color: #2a363b;
+  font-size: 18px;
+}
+
+.active {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 500;
+  color: #b92121;
   font-size: 18px;
 }
