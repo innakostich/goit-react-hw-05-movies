@@ -1,4 +1,3 @@
-import React from 'react';
 import css from './Loader.module.css';
 import { BeatLoader } from 'react-spinners';
 

@@ -1,46 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getMovieCredits } from '../../services/movie.api';
-import css from './Cast.module.css';
+import { useState, useEffect } from 'react';
+import { getMovieCast, IMAGE_URL } from '../services/movies-api';
+import PropTypes from 'prop-types';
 
-const Cast = () => {
-  const { movieId } = useParams();
+export default function MovieCastView({ movieId }) {
   const [cast, setCast] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovieCredits = async () => {
-      try {
-        const response = await getMovieCredits(movieId);
-        setCast(response.cast);
-        setLoading(false);
-      } catch (error) {
-        console.error('Failed to fetch movie credits:', error);
-        setLoading(false);
-      }
+    const getCast = async () => {
+      const { cast } = await getMovieCast(movieId);
+      setCast(cast);
     };
 
-    fetchMovieCredits();
+    getCast();
   }, [movieId]);
 
-  if (loading) {
-    return (
-      <div className={css.loaderContainer}>
-        <BeatLoader color="#555" />
-      </div>
-    );
-  }
-
   return (
-    <div className={css.cast}>
-      <h1>Cast</h1>
-      <ul>
-        {cast.map((actor) => (
-          <li key={actor.id}>{actor.name}</li>
+    <ul>
+      {cast &&
+        cast.map(({ id, profile_path, name, character }) => (
+          <li key={id}>
+            <img
+              src={
+                profile_path
+                  ? IMAGE_URL + profile_path
+                  : `https://bitsofco.de/content/images/2018/12/broken-1.png`
+              }
+              alt={name}
+              width="100"
+              height=""
+            />
+            <p>{name}</p>
+            <p>Character: {character}</p>
+          </li>
         ))}
-      </ul>
-    </div>
+    </ul>
   );
-};
+}
 
-export default Cast;
+MovieCastView.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};
