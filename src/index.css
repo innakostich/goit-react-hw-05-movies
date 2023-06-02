@@ -22,3 +22,8 @@ h1,
 h2 {
   color: #21b9a0;
 }
+.active {
+  color:#ff0000be;
+  text-decoration: underline;
+  transition: 250ms cubic-bezier;
+}
