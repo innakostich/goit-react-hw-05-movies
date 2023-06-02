@@ -1,13 +1,13 @@
 .link {
-    display: inline-block;
-    text-decoration: none;
-    padding: 12px;
-    font-weight: 500;
-    font-weight: bold;
-    color: #3f5a69;
-    font-size: 18px;
-  }
-  
-  .active {
-        color: #2181b9;
-    }
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 500;
+  font-weight: bold;
+  color: #3f5a69;
+  font-size: 18px;
+}
+
+.active {
+  color: #ff000069;
+}
