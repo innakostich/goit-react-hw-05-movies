@@ -1,14 +1,17 @@
-import { useLoaderData } from 'react-router-dom';
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NotFoundView() {
-  const history = useLoaderData();
+  const navigate = useNavigate();
 
   const onGoBack = () => {
-    history.push('/');
+    navigate('/');
   };
+
   return (
     <>
-      <h2>404 Not Found </h2>
+      <h2>404 Not Found</h2>
       <button type="button" onClick={onGoBack}>
         Go home
       </button>
