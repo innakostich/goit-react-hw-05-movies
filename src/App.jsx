@@ -1,5 +1,5 @@
 
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Container from './components/Layout/Container';
 import Loader from './components/Loader/Loader';
@@ -18,13 +18,13 @@ export default function App() {
       <Navigation />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/movies" element={<MoviesPage baseUrl={BASE_URL} />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/movies" element={<MoviesPage baseUrl={BASE_URL} />} />
           <Route
             path="/movies/:movieId"
             element={<MovieDetailsPage baseUrl={BASE_URL} />}
           />
-          <Route path="*" element={<NotFoundView />} />
+          <Route path="/*" element={<NotFoundView />} />
         </Routes>
       </Suspense>
     </Container>

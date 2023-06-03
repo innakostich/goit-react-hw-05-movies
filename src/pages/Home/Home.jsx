@@ -1,6 +1,4 @@
 
-
-
 import React, { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from 'services/movies.api';
 import { BeatLoader } from 'react-spinners';

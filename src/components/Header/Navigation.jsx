@@ -4,11 +4,11 @@ import css from './Navigation.module.css';
 
 const Navigation = () => (
   <nav>
-    <NavLink exact to="/" className={css.link} activeClassName={css.active}>
+    <NavLink exact="true" to="/" className={css.link} activeclassname={css.active}>
       Home
     </NavLink>
 
-    <NavLink to="/movies" className={css.link} activeClassName={css.active}>
+    <NavLink exact="true" to="/movies" className={css.link} activeclassname={css.active}>
       Movies
     </NavLink>
   </nav>
