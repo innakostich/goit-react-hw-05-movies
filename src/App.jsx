@@ -21,7 +21,7 @@ export default function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/movies" element={<MoviesPage baseUrl={BASE_URL} />} />
           <Route
-            path="/movies/:movieId"
+            path="/movies/:movieId/*"
             element={<MovieDetailsPage baseUrl={BASE_URL} />}
           />
           <Route path="/*" element={<NotFoundView />} />

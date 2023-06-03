@@ -23,7 +23,7 @@ export default function MovieDetails() {
   }, [movieId]);
 
   const onGoBack = () => {
-    history.push(location?.state?.from?.location ?? '/movies');
+    history(location?.state?.from?.location ?? '/movies');
   };
 
   return (
@@ -64,16 +64,16 @@ export default function MovieDetails() {
       <p>Additional information</p>
       <nav>
         <NavLink
-          to={{ pathname: `/movies/${movieId}/cast`, state: { from: location } }}
+          to={`/movies/${movieId}/cast`}
           className={css.link}
-          activeClassName={css.active}
+          activeclassname={css.active}
         >
           Cast
         </NavLink>
         <NavLink
-          to={{ pathname: `/movies/${movieId}/reviews`, state: { from: location } }}
+          to={`/movies/${movieId}/reviews`}
           className={css.link}
-          activeClassName={css.active}
+          activeclassname={css.active}
         >
           Reviews
         </NavLink>
@@ -88,5 +88,3 @@ export default function MovieDetails() {
     </>
   );
 }
-
-
