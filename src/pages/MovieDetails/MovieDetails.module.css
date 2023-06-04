@@ -45,8 +45,9 @@ hr {
 } */
 .movieContainer {
   display: flex;
-  /* align-items: center; */
   justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .movieImg {
@@ -54,7 +55,7 @@ hr {
 }
 
 img {
-  width: 250px;
+  width: 300px;
 }
 
 .link {

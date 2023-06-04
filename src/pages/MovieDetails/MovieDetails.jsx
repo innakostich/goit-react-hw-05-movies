@@ -71,7 +71,7 @@ export default function MovieDetails() {
           Cast
         </NavLink>
         <NavLink
-          to={`/movies/${movieId}/reviews`}
+         to={`/movies/${movieId}/reviews`}
           className={css.link}
           activeclassname={css.active}
         >

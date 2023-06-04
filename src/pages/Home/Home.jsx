@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from 'services/movies.api';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,6 +11,7 @@ const HomePage = () => {
   useEffect(() => {
     const getMovies = async () => {
       const { results } = await fetchTrendingMovies();
+
       setMovies(results);
       setLoading(false);
     };
@@ -24,12 +24,11 @@ const HomePage = () => {
       <h1>Trending today</h1>
 
       {loading ? (
-        <BeatLoader color="#555" loading={loading} />
+        <BeatLoader color="#506f70" />
       ) : (
-        movies &&
-        movies.map(({ id, title }) => (
-          <ul key={id}>
-            <li>
+        <ul>
+          {movies.map(({ id, title }) => (
+            <li key={id}>
               <Link
                 to={{
                   pathname: `/movies/${id}`,
@@ -44,8 +43,8 @@ const HomePage = () => {
                 <p>{title}</p>
               </Link>
             </li>
-          </ul>
-        ))
+          ))}
+        </ul>
       )}
     </>
   );
