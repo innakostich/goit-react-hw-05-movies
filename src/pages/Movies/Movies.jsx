@@ -49,7 +49,7 @@ const Movies = () => {
 
   return (
     <>
-      <header className={css.searchbar}>
+      <header className={css.searchBar}>
         <form className={css.searchForm} onSubmit={handleSubmit}>
           <div className={css.searchFormInputContainer}>
             <input

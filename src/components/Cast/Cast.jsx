@@ -8,7 +8,7 @@ const MovieCastView = ({ movieId }) => {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    const fetchCast = async () => {
+    const getCast = async () => {
       try {
         const { cast } = await getMovieCast(movieId);
         setCast(cast);
@@ -17,7 +17,7 @@ const MovieCastView = ({ movieId }) => {
       }
     };
 
-    fetchCast();
+    getCast();
   }, [movieId]);
 
   return (

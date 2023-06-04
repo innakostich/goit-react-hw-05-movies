@@ -32,9 +32,10 @@ export default function MovieDetails() {
         <div className={css.notFound}>This movie is not found</div>
       ) : (
         <>
-          <button type="button" onClick={onGoBack}>
+          <button type="button" onClick={onGoBack} className={css.goBackButton}>
             Go back
-          </button>
+             </button>
+
           <div className={css.movieContainer}>
             <div className={css.movieImg}>
               <img
