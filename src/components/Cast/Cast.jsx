@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getMovieCast, IMAGE_URL } from 'services/movies.api';
@@ -17,9 +16,7 @@ const MovieCast = ({ movieId }) => {
       }
     };
 
-    if (movieId) {
-      fetchCast();
-    }
+    fetchCast();
   }, [movieId]);
 
   return (

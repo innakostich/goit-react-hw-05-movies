@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { useParams, useLocation, useNavigate, NavLink,Outlet } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, NavLink, Outlet } from 'react-router-dom';
 import { getMovieDetails, IMAGE_URL, getMovieCast, getReviews } from 'services/movies.api';
 import Loader from 'components/Loader/Loader';
 import css from './MovieDetails.module.css';
@@ -21,8 +21,8 @@ const MovieDetails = () => {
     const getMovieCastAndReviews = async () => {
       const movieCast = await getMovieCast(movieId);
       const movieReviews = await getReviews(movieId);
-      setCast(movieCast);
-      setReviews(movieReviews);
+      setCast(movieCast.cast);
+      setReviews(movieReviews.results);
     };
 
     getMovie();
@@ -88,14 +88,10 @@ const MovieDetails = () => {
       </nav>
 
       <Suspense fallback={<Loader />}>
-      <Outlet movieId={movieId} cast={cast} reviews={reviews} />
+        <Outlet movieId={movieId} cast={cast} reviews={reviews} />
       </Suspense>
     </>
   );
 };
 
 export default MovieDetails;
-
-
-
-

@@ -3,22 +3,22 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getReviews } from 'services/movies.api';
 
-export default function MovieReview({ movieId }) {
+const MovieReview = ({ movieId }) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { results } = await getReviews(movieId);
-        setReviews(results);
+        if (movieId) {
+          const { results } = await getReviews(movieId);
+          setReviews(results);
+        }
       } catch (error) {
         console.log('Error fetching movie reviews:', error);
       }
     };
 
-    if (movieId) {
-      fetchReviews();
-    }
+    fetchReviews();
   }, [movieId]);
 
   return (
@@ -39,8 +39,10 @@ export default function MovieReview({ movieId }) {
       )}
     </div>
   );
-}
+};
 
 MovieReview.propTypes = {
   movieId: PropTypes.string.isRequired,
 };
+
+export default MovieReview;
