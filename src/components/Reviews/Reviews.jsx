@@ -1,16 +1,24 @@
-import { useState, useEffect } from 'react';
-import { getReviews } from 'services/movies.api';
+
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { getReviews } from 'services/movies.api';
 
 export default function MovieReview({ movieId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const getCast = async () => {
-      const { results } = await getReviews(movieId);
-      setReviews(results);
+    const fetchReviews = async () => {
+      try {
+        const { results } = await getReviews(movieId);
+        setReviews(results);
+      } catch (error) {
+        console.log('Error fetching movie reviews:', error);
+      }
     };
-    getCast();
+
+    if (movieId) {
+      fetchReviews();
+    }
   }, [movieId]);
 
   return (
@@ -20,14 +28,14 @@ export default function MovieReview({ movieId }) {
           <ul>
             {reviews.map(({ id, author, content }) => (
               <li key={id}>
-                <p>{author}</p>
+                <h4>{author}</h4>
                 <p>{content}</p>
               </li>
             ))}
           </ul>
         </>
       ) : (
-        <p>We don't have any reviews for this movie</p>
+        <p>No reviews available for this movie.</p>
       )}
     </div>
   );
