@@ -4,6 +4,7 @@ import { getMovieDetails, IMAGE_URL, getMovieCast, getReviews } from 'services/m
 import Loader from 'components/Loader/Loader';
 import css from './MovieDetails.module.css';
 
+
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
