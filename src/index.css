@@ -19,7 +19,8 @@ li {
 }
 
 h1,
-h2 {
+h2, 
+h3 {
   color: #21b9a0;
 }
 .active {

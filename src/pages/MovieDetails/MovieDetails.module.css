@@ -49,3 +49,14 @@ img {
   font-size: 16px;
 
 }
+.genres{
+  font-weight: 500;
+  color: #2a363b;
+  font-size: 16px;
+}
+.addInfo,
+.listInfo{
+  font-weight: 500;
+  color: #2a363b;
+  font-size: 16px;
+}
