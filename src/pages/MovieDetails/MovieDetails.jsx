@@ -35,11 +35,11 @@
   // };
 
 //   return (
-//     <>
-//       {!movie ? (
-//         <div className={css.notFound}>This movie is not found</div>
-//       ) : (
-//         <>
+    // <>
+    //   {!movie ? (
+    //     <div className={css.notFound}>This movie is not found</div>
+    //   ) : (
+    //     <>
           // <button type="button" onClick={onGoBack} className={css.goBackButton}>
           //   Go back
           // </button>
@@ -96,6 +96,7 @@
 // };
 
 // export default MovieDetails;
+
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Outlet, Link, useParams, useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 import { getMovieDetails, IMAGE_URL } from 'services/movies.api';
@@ -121,8 +122,13 @@ const MovieDetails = () => {
     async function fetchMovie() {
       try {
         const data = await getMovieDetails(movieId);
-        setMovieDetails(data);
-        setMovie(data);
+        if (data) {
+          setMovieDetails(data);
+          setMovie(data);
+        } else {
+          setMovieDetails({});
+          setMovie({});
+        }
       } catch (error) {
         console.log(error);
       }
@@ -138,36 +144,40 @@ const MovieDetails = () => {
           Go back
         </button>
       </Link>
-      <div className={css.movieContainer}>
-        <div className={css.movieImg}>
-          <img
-            src={
-              movie.poster_path
-                ? IMAGE_URL + movie.poster_path
-                : 'https://bitsofco.de/content/images/2018/12/broken-1.png'
-            }
-            alt={movie.title}
-            width=""
-            height=""
-          />
+      {movieDetails && movieDetails.title ? (
+        <div className={css.movieContainer}>
+          <div className={css.movieImg}>
+            <img
+              src={
+                movie.poster_path
+                  ? IMAGE_URL + movie.poster_path
+                  : 'https://bitsofco.de/content/images/2018/12/broken-1.png'
+              }
+              alt={movie.title}
+              width=""
+              height=""
+            />
+          </div>
+          <div>
+            <h2>{movie.title}</h2>
+            <p>User Score: {`${movie.vote_average * 10}`}%</p>
+            <h3>Overview</h3>
+            <p>{movieDetails.overview}</p>
+            <h3>Genres</h3>
+            <ul className={css.genres}>
+              {movieDetails.genres &&
+                movieDetails.genres.map(item => (
+                  <li key={item.id}>{item.name}</li>
+                ))}
+            </ul>
+          </div>
         </div>
-        <div>
-          <h2>{movie.title}</h2>
-          <p>User Score: {`${movie.vote_average * 10}`}%</p>
-          <h3>Overview</h3>
-          <p>{movieDetails.overview}</p>
-          <h3>Genres</h3>
-          <ul className={css.genres}>
-            {movieDetails.genres &&
-              movieDetails.genres.map(item => (
-                <li key={item.id}>{item.name}</li>
-              ))}
-          </ul>
-        </div>
-      </div>
-      <div >
-        <h4 className={css.addInfo}>Additional information</h4>
-        <ul className={css.listInfo}>
+      ) : (
+        <div className={css.notFound}>This movie is not found</div>
+      )}
+      <div className={css.addInfoWrapper}>
+        <h4 className={css.addInfoTitle}>Additional information</h4>
+        <ul className={css.addInfoList}>
           <li>
             <Link to={`${movieId}/cast`} className={css.link}>
               Cast
@@ -193,5 +203,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-
